@@ -281,6 +281,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 		TextView attitudes = h.attitudes;
 		TextView retweet = h.retweets;
 		TextView comments = h.comments;
+		ImageView star = h.star;
 		
 		name.setText(msg.user != null ? msg.user.getName() : "");
 		
@@ -328,6 +329,12 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 				h.avatar.setImageBitmap(bmp);
 				h.avatar.setTag(false);
 			}
+		}
+
+		if (!msg.favorited) {
+			star.setImageResource(R.drawable.ic_star_outline_black_36dp);
+		} else {
+			star.setImageResource(R.drawable.ic_star_grey600_36dp);
 		}
 		
 		//new ImageDownloader().execute(v);
@@ -408,6 +415,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 			}
 		}
 
+
 		p.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
@@ -430,6 +438,10 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 
 		// Pop up!
 		p.show();
+	}
+
+	void starWeibo(ViewHolder h) {
+		new FavTask().execute(h, null, null);
 	}
 	
 	public void notifyDataSetChangedAndClone() {
@@ -622,7 +634,49 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 			}
 		}
 	}
-	
+
+	private class FavTask extends AsyncTask<Object, Void, Void> {
+		private ViewHolder h;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Void doInBackground(Object... params) {
+			h = (ViewHolder) params[0];
+			MessageModel msg = h.msg;
+			if (msg.favorited) {
+				PostApi.unfav(msg.id);
+			} else {
+				PostApi.fav(msg.id);
+			}
+
+			msg.favorited = !msg.favorited;
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			notifyChangeStarStatus();
+			if (h.msg.favorited) {
+				Utility.showShortToast(h.context, "收藏成功");
+			} else {
+				Utility.showShortToast(h.context, "已取消收藏");
+			}
+		}
+
+		void notifyChangeStarStatus() {
+			if (!h.msg.favorited) {
+				h.star.setImageResource(R.drawable.ic_star_outline_black_36dp);
+			} else {
+				h.star.setImageResource(R.drawable.ic_star_grey600_36dp);
+			}
+		}
+	}
+
 	public static class ViewHolder extends HeaderViewAdapter.ViewHolder {
 		public boolean sub = false;
 
@@ -646,6 +700,10 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 		public MessageModel msg = null;
 		public Context context;
 		public WeiboAdapter adapter;
+
+		public ImageView star;
+		private boolean mFavTaskRunning;
+		private boolean mFavourited;
 
 		public ViewHolder(View v) {
 			super(v);
@@ -680,12 +738,18 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 			card = Utility.findViewById(v, R.id.card);
 			origin_parent = Utility.findViewById(v, R.id.weibo_origin);
 			comment_and_retweet = Utility.findViewById(v, R.id.weibo_comment_and_retweet);
-			
+			star = Utility.findViewById(v, R.id.weibo_star);
+
 			// Events
 			Utility.bindOnClick(this, popup, "popup");
 			Utility.bindOnClick(this, avatar, "showUser");
 			Utility.bindOnClick(this, card, "show");
 			Utility.bindOnClick(this, origin_parent, "showOrig");
+			Utility.bindOnClick(this, star, "star");
+		}
+
+		void star() {
+			adapter.starWeibo(this);
 		}
 
 		void popup() {
@@ -716,7 +780,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 				i.setClass(context, SingleActivity.class);
 				i.putExtra("msg", msg);
 			}
-			
+
 			ActivityOptionsCompat o =
 				ActivityOptionsCompat.makeSceneTransitionAnimation(
 					(Activity) context, v, "msg");

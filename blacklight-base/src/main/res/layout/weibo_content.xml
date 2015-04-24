@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toLeftOf="@+id/weibo_popup"
+            android:layout_toLeftOf="@+id/weibo_star"
             android:layout_toRightOf="@id/weibo_avatar"
             android:ellipsize="end"
             android:singleLine="true"
@@ -65,6 +65,18 @@
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
             android:src="@drawable/ic_menu_more"
+            app:tintColor="?attr/CardForeground"/>
+
+        <info.papdt.blacklight.ui.common.TintImageView
+            android:id="@+id/weibo_star"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="45dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@id/weibo_popup"
+            android:layout_alignBottom="@id/weibo_popup"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_star_outline_black_36dp"
             app:tintColor="?attr/CardForeground"/>
 
     </RelativeLayout>
