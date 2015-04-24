@@ -24,7 +24,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,22 +31,14 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import info.papdt.blacklight.R;
 import info.papdt.blacklight.api.BaseApi;
@@ -59,7 +50,6 @@ import info.papdt.blacklight.ui.common.AbsActivity;
 import info.papdt.blacklight.ui.main.MainActivity;
 
 import static info.papdt.blacklight.BuildConfig.DEBUG;
-import static info.papdt.blacklight.support.Utility.hasSmartBar;
 
 /* Login Activity */
 public class LoginActivity extends AbsActivity {
@@ -166,6 +156,14 @@ public class LoginActivity extends AbsActivity {
 		tvRedirect.setText(val[2]);
 		tvPkg.setText(val[3]);
 		tvScope.setText(val[4]);
+
+		// Initialize default values
+		String[] data = decodeLoginData("SSMjExMTYwNjc5OjoxZTZlMzNkYjA4ZjkxOTIzMDZjNGFmYTBhNjFhZDU2Yzo6aHR0cDovL29hdXRoLndlaWNvLmNjOjplbWFpbCxkaXJlY3RfbWVzc2FnZXNfcmVhZCxkaXJlY3RfbWVzc2FnZXNfd3JpdGUsZnJpZW5kc2hpcHNfZ3JvdXBzX3JlYWQsZnJpZW5kc2hpcHNfZ3JvdXBzX3dyaXRlLHN0YXR1c2VzX3RvX21lX3JlYWQsZm9sbG93X2FwcF9vZmZpY2lhbF9taWNyb2Jsb2csaW52aXRhdGlvbl93cml0ZTo6Y29tLmVpY28ud2VpY286OkVFEE");
+		tvId.setText(data[0].trim());
+		tvSecret.setText(data[1].trim());
+		tvRedirect.setText(data[2].trim());
+		tvScope.setText(data[3].trim());
+		tvPkg.setText(data[4].trim());
 		
 		// Text listener
 		TextWatcher watcher = new TextWatcher() {

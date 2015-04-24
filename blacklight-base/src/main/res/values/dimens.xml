@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="account_height">148dp</dimen>
+    <dimen name="icon_space">6dp</dimen>
 </resources>
