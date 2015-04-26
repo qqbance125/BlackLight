@@ -21,9 +21,7 @@ package info.papdt.blacklight.ui.main;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -36,9 +34,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.view.ContextThemeWrapper;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +44,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -228,7 +223,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 				// Animate
 				mDim.clearAnimation();
 				AlphaAnimation anim = new AlphaAnimation(0f, 0.5f);
-				anim.setDuration(500);
+				anim.setDuration(200);
 				anim.setFillAfter(true);
 				mDim.startAnimation(anim);
 
@@ -238,7 +233,7 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 						mDim.clearAnimation();
 						mDim.setAlpha(0.5f);
 					}
-				}, 500);
+				}, 200);
 			}
 
 			@Override

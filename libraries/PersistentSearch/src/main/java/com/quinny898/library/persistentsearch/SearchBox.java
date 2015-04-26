@@ -64,6 +64,7 @@ public class SearchBox extends RelativeLayout {
 	private ProgressBar pb;
 	private ArrayList<SearchResult> initialResults;
 	private boolean searchWithoutSuggestions = true;
+	private int mCircleAnimatorDurationTime = 200;
 
 	/**
 	 * Create a new searchbox
@@ -465,6 +466,10 @@ public class SearchBox extends RelativeLayout {
 		return searchables;
 	}
 
+	public void setCircleAnimatorDuration(int time) {
+		this.mCircleAnimatorDurationTime = time;
+	}
+
 	private void revealFrom(float x, float y, Activity a, SearchBox s) {
 		Display display = a.getWindowManager().getDefaultDisplay();
 		Point size = new Point();
@@ -483,7 +488,7 @@ public class SearchBox extends RelativeLayout {
 		SupportAnimator animator = ViewAnimationUtils.createCircularReveal(
 				root, cx, cy, 0, finalRadius);
 		animator.setInterpolator(new AccelerateDecelerateInterpolator());
-		animator.setDuration(500);
+		animator.setDuration(mCircleAnimatorDurationTime);
 		animator.addListener(new SupportAnimator.AnimatorListener(){
 
 			@Override
