@@ -7,22 +7,22 @@ import org.litepal.crud.DataSupport;
  */
 public class FavItem extends DataSupport {
 
-    private int id;
-    private boolean isFav;
+    private long wid;
+    private boolean favorited;
 
-    public int getId() {
-        return id;
+    public long getWid() {
+        return wid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWid(long wid) {
+        this.wid = wid;
     }
 
-    public boolean isFav() {
-        return isFav;
+    public boolean isFavorited() {
+        return favorited;
     }
 
-    public void setIsFav(boolean isFav) {
-        this.isFav = isFav;
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
     }
 }

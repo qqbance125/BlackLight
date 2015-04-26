@@ -40,5 +40,6 @@ public class HomeTimeLineFragment extends TimeLineFragment
 	protected void load(boolean param) {
 		mCache.load(param, ((MainActivity) getActivity()).mCurrentGroupId);
 		mCache.cache();
+		mAdapter.notifyDataSetLoaded();
 	}
 }

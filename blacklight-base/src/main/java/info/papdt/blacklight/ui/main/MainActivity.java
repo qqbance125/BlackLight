@@ -50,6 +50,8 @@ import android.widget.Toast;
 import com.quinny898.library.persistentsearch.SearchBox;
 import com.quinny898.library.persistentsearch.SearchResult;
 
+import org.litepal.tablemanager.Connector;
+
 import java.util.List;
 import java.util.Random;
 
@@ -171,6 +173,8 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 
 		super.onCreate(savedInstanceState);
 
+		Connector.getDatabase();//Initialize litepay db
+
 		// Initialize views
 		mDrawer = Utility.findViewById(this, R.id.drawer);
 		mDrawerWrapper = Utility.findViewById(this, R.id.drawer_wrapper);
@@ -192,23 +196,25 @@ public class MainActivity extends ToolbarActivity implements View.OnClickListene
 		mDim = Utility.findViewById(this, R.id.main_dim);
 
 		final String[] pages = getResources().getStringArray(R.array.main_tabs);
-		mPager.setAdapter(new FragmentStatePagerAdapter(getFragmentManager()) {
-			@Override
-			public int getCount() {
-				return pages.length;
-			}
+		mPager.setAdapter(
+				new FragmentStatePagerAdapter(getFragmentManager()) {
+					@Override
+					public int getCount() {
+						return pages.length;
+					}
 
-			@Override
-			public Fragment getItem(int position) {
+					@Override
+					public Fragment getItem(int position) {
 
-				return mFragments[position];
-			}
+						return mFragments[position];
+					}
 
-			@Override
-			public CharSequence getPageTitle(int position) {
-				return pages[position];
-			}
-		});
+					@Override
+					public CharSequence getPageTitle(int position) {
+						return pages[position];
+					}
+				}
+		);
 		mPager.setOffscreenPageLimit(pages.length);
 		mTabs.setViewPager(mPager);
 

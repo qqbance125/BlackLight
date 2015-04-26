@@ -48,6 +48,7 @@ import info.papdt.blacklight.R;
 import info.papdt.blacklight.api.attitudes.AttitudesApi;
 import info.papdt.blacklight.api.comments.NewCommentApi;
 import info.papdt.blacklight.api.statuses.PostApi;
+import info.papdt.blacklight.cache.favorites.FavItemCache;
 import info.papdt.blacklight.cache.login.LoginApiCache;
 import info.papdt.blacklight.cache.statuses.HomeTimeLineApiCache;
 import info.papdt.blacklight.cache.user.UserApiCache;
@@ -336,6 +337,9 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 				h.avatar.setTag(false);
 			}
 		}
+
+		if (!msg.favorited)
+			msg.favorited = FavItemCache.getIsFavFromCache(msg);
 
 		if (!msg.favorited) {
 			star.setImageResource(R.drawable.ic_star_outline_black_36dp);
@@ -673,6 +677,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 			} else {
 				Utility.showShortToast(h.context, "已取消收藏");
 			}
+
 		}
 
 		void notifyChangeStarStatus() {
@@ -681,6 +686,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 			} else {
 				h.star.setImageResource(R.drawable.ic_star_grey600_36dp);
 			}
+			FavItemCache.cache(h.msg);
 		}
 	}
 

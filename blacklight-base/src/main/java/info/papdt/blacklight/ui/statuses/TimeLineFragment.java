@@ -23,10 +23,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
- 
+
 import info.papdt.blacklight.cache.statuses.HomeTimeLineApiCache;
 import info.papdt.blacklight.support.adapter.WeiboAdapter;
-import info.papdt.blacklight.support.adapter.HeaderViewAdapter;
  
 public abstract class TimeLineFragment extends AbsTimeLineFragment<WeiboAdapter>
 {
@@ -87,6 +86,7 @@ public abstract class TimeLineFragment extends AbsTimeLineFragment<WeiboAdapter>
 	protected void load(boolean param) {
 		mCache.load(param);
 		mCache.cache();
+		buildAdapter().notifyDataSetLoaded();
 	}
 	
 	protected HomeTimeLineApiCache bindApiCache() {
