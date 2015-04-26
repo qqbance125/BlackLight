@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "me.drakeet.blacklight"
-        minSdkVersion 9
-        targetSdkVersion 22
+        minSdkVersion 15
+        targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName "drakeet"
     }
     buildTypes {
         release {
@@ -20,6 +20,5 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.1.0'
+    compile project(':blacklight-base')
 }

@@ -39,7 +39,7 @@ public class SettingsFragment extends info.papdt.blacklight.ui.settings.Settings
 			public boolean onPreferenceClick(Preference pref) {
 				new AlertDialog.Builder(getActivity())
 					.setCancelable(true)
-					.setMessage(R.string.snapshot_alert)
+					.setMessage(R.string.drakeet_alert)
 					.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface p1, int p2) {
