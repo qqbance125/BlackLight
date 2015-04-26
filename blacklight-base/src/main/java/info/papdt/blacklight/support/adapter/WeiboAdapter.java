@@ -1,5 +1,5 @@
 /* 
- * Copyright (C) 2014 Peter Cai
+ * Copyright (C) 2015 Peter Cai
  *
  * This file is part of BlackLight
  *
@@ -122,6 +122,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 	private RecyclerView mRecycler;
 	
 	public WeiboAdapter(Context context, RecyclerView listView, MessageListModel list, boolean bindOrig, boolean showCommentStatus) {
+		super(listView);
 		mList = list;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mTimeUtils = StatusTimeUtils.instance(context);
@@ -224,6 +225,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 		h.msg = null;
 	}
 	
+	@Override
 	public void addOnScrollListener(RecyclerView.OnScrollListener listener) {
 		mListeners.add(listener);
 	}
@@ -444,6 +446,7 @@ public class WeiboAdapter extends HeaderViewAdapter<WeiboAdapter.ViewHolder> {
 		new FavTask().execute(h, null, null);
 	}
 	
+	@Override
 	public void notifyDataSetChangedAndClone() {
 		mClone = mList.clone();
 		super.notifyDataSetChanged();
