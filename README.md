@@ -19,8 +19,6 @@
 
 drakeet debug 版本下载（已经使用新包名了，可以和虾大的版本同时安装同时存在）：https://github.com/drakeet/BlackLight/raw/master/app-debug.apk
 
-我fork 的版本地址：https://github.com/drakeet/BlackLight
-
 原开源地址：https://github.com/PaperAirplane-Dev-Team/BlackLight 
 
 ####截图如下
