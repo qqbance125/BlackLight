@@ -223,7 +223,7 @@ public class ImageActivity extends AbsActivity /*implements OnPhotoTapListener*/
 				ll.addView(p, w, w);
 				container.addView(ll, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 				mViews.set(position, ll);
-				new DownloadTask().execute(new Object[]{ll, position, new MyCallback(p)});
+				new DownloadTask().execute(new Object[] {ll, position, new MyCallback(p)});
 				return ll;
 			}
 		}
